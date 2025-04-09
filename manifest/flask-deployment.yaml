@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  namespace: final
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: <account_id>.dkr.ecr.us-east-1.amazonaws.com/simple-web-app:latest
+        ports:
+        - containerPort: 81
+        env:
+        - name: IMAGE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: IMAGE_URL
+        - name: TEAM_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: TEAM_NAME
+        - name: TEAM_SLOGAN
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: TEAM_SLOGAN
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: MYSQL_PASSWORD
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: AWS_SECRET_ACCESS_KEY
