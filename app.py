@@ -16,7 +16,7 @@ DBPORT = int(os.environ.get("DBPORT") or "3306")
 
 # Developer name and S3 info from ConfigMap or env
 OWNER_NAME = os.environ.get("OWNER_NAME", "Shailendra Kushwaha")
-BUCKET_NAME = os.environ.get("S3_BUCKET_NAME", "your-bucket-name")
+BUCKET_NAME = os.environ.get("S3_BUCKET_NAME", "clo835group8final")
 OBJECT_KEY = os.environ.get("S3_OBJECT_KEY", "background.jpg")
 LOCAL_IMAGE_NAME = "background.jpg"
 LOCAL_IMAGE_PATH = f"static/{LOCAL_IMAGE_NAME}"
