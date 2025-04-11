@@ -74,7 +74,7 @@ def AddEmp():
     finally:
         cursor.close()
 
-    return render_template('addempoutput.html', name=emp_name, owner_name=OWNER_NAME, bg_image=LOCAL_IMAGE_PATH)
+    return render_template('addempoutput.html', name=emp_name, TEAM_NAME=TEAM_NAME, TEAM_SLOGAN=TEAM_SLOGAN, bg_image=LOCAL_IMAGE_PATH)
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
