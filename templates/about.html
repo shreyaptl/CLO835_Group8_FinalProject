@@ -19,10 +19,28 @@
         h2, h3 {
             font-weight: normal;
         }
+        .owner {
+            font-style: italic;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            color: red;
+        }
+        
+        .owner strong,
+        .owner em {
+            display: inline;
+            font-style: normal;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
-    <h1>{{ TEAM_NAME }}</h1>
-    <h2>{{ TEAM_SLOGAN }}</h2>
+    <div class="owner">
+            TEAM_NAME: <strong>CloudSprint</strong><br>
+            TEAM_SLOGAN: <em>Where Ideas Take Flight</em>
+        </div>
 </body>
 </html>
