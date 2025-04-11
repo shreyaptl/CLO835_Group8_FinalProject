@@ -47,7 +47,8 @@
 <body>
     <div class="container">
         <h1>Find Employee Info</h1>
-        <div class="owner">Managed by: {{ owner_name }}</div>
+        <div class="owner">Managed by: {{ TEAM_NAME }}</div>
+        <div class="owner">Managed by: {{ TEAM_SLOGAN }}</div>
         <form action="/fetchdata" method="POST">
             <input type="number" name="emp_id" placeholder="Enter Employee ID" required><br>
             <button type="submit">Fetch Info</button>
