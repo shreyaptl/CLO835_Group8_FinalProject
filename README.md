@@ -23,10 +23,42 @@ docker build -t my_app -f Dockerfile .
 
 ### Running mysql
 ```
-docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=db_pass123 -e MYSQL_DATABASE=mydb -p 3306:3306 my_db
+docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=db_pass123 -p 3306:3306 my_db
 ```
 
-### Running app
+## Quick Demo Command
+
+To quickly run the application:
+
+1. Set up environment variables:
+```bash
+# Set required variables
+export TEAM_NAME="CloudSprint"
+export TEAM_SLOGAN="Where Ideas Take Flight"
+export IMAGE_URL="s3://final-project-background/background.jpg"
+export S3_BUCKET_NAME="clo835group8final"
+export S3_REGION="us-east-1" 
+export LOCAL_IMAGE_PATH="/app/static/images/background.jpg"
+export DBHOST=mysql
+export DBPORT=3306
+export DBUSER=root
+export DBPWD=db_pass123
+export DATABASE=employees
+
+# Add your AWS credentials
+export AWS_ACCESS_KEY_ID="your_access_key_here"
+export AWS_SECRET_ACCESS_KEY="your_secret_key_here"
+export AWS_SESSION_TOKEN="your_session_token_here"
 ```
-docker run -d --name myapp -e DBHOST=mysql -e DBPORT=3306 -e DBUSER=root -e DBPWD=db_pass123 -e DATABASE=employees -e APP_COLOR=blue -p 81:81 my_app
+
+## Run docker command
+
+```
+docker run -d \
+  -e TEAM_NAME -e TEAM_SLOGAN -e IMAGE_URL -e S3_BUCKET_NAME -e S3_REGION -e LOCAL_IMAGE_PATH \
+  -e DBHOST -e DBPORT -e DBUSER -e DBPWD -e DATABASE \
+  -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN \
+  --network clo835project \
+  -p 81:81 \
+  my_app
 ```
