@@ -15,3 +15,8 @@ data:
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY: 
   AWS_SESSION_TOKEN:
+  dbhost: "mysql"
+  database: "employees"
+  dbport: "3306"
+  owner_name: "Shailendra Kushwaha"
+  s3_object_key: "background.jpg"
