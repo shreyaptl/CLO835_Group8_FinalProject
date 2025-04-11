@@ -6,40 +6,37 @@ on:
       - dev
 
 jobs:
-  build-and-push:
-    name: Build and Push Images
+  build:
+    name: Build Image
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2
 
-      - name: Set up AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        mask-password: true
+        registry-type: private
+        skip-logout: false
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+        AWS_REGION: us-east-1
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+    - name: Build, test, tag, and push SQL and WebApp images to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        SQL_ECR_REPOSITORY: sql_final
+        WEBAPP_ECR_REPOSITORY: app_final
+        IMAGE_TAG: v0.1
+      run: |
+        # Build Docker images
+        docker build -t $ECR_REGISTRY/$SQL_ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_mysql .
+        docker build -t $ECR_REGISTRY/$WEBAPP_ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
 
-      - name: Build, tag, and push Flask app image to Amazon ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: app_final
-          IMAGE_TAG: latest
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-      - name: Build, tag, and push MySQL image to Amazon ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: mysql_final
-          IMAGE_TAG: latest
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_mysql .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        # Push images to ECR
+        docker push $ECR_REGISTRY/$SQL_ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$WEBAPP_ECR_REPOSITORY:$IMAGE_TAG
