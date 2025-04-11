@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+    <style>
+        body {
+            background-image: url('{{ bg_image }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 15%;
+        }
+        h1 {
+            font-size: 40px;
+        }
+        h2, h3 {
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ team_name }}</h1>
+    <h2>{{ team_slogan }}</h2>
+    <h3>Presented by: {{ owner_name }}</h3>
+</body>
+</html>

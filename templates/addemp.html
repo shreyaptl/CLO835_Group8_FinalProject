@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Employee Information</title>
+    <style>
+        body {
+            background-image: url('{{ bg_image }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: black;
+            font-family: Avenir, Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            margin: 60px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h1 {
+            color: DodgerBlue;
+        }
+        input {
+            width: 80%;
+            height: 30px;
+            margin: 10px 0;
+            font-size: 14pt;
+            color: grey;
+            padding: 5px;
+        }
+        button {
+            width: 250px;
+            height: 45px;
+            font-size: 14pt;
+            background-color: grey;
+            color: white;
+            border: none;
+            margin: 10px;
+        }
+        a {
+            color: DodgerBlue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .owner {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Database</h1>
+        <div class="owner">Managed by: {{ owner_name }}</div>
+
+        <form action="/addemp" autocomplete="on" method="POST" enctype="multipart/form-data">
+            Employee ID:<br>
+            <input type="number" name="emp_id" required><br>
+
+            First Name:<br>
+            <input type="text" name="first_name" required><br>
+
+            Last Name:<br>
+            <input type="text" name="last_name" required><br>
+
+            Primary Skills:<br>
+            <input type="text" name="primary_skill" required><br>
+
+            Location:<br>
+            <input type="text" name="location" required><br>
+
+            <button type="submit">Add Employee</button><br>
+            <button type="submit" formaction="/getemp">Get Employee Info</button>
+        </form>
+
+        <br>
+        <a href="/about">About Us</a>
+    </div>
+</body>
+</html>

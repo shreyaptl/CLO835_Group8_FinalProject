@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Info</title>
+    <style>
+        body {
+            background-image: url('{{ bg_image }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+        .container {
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin: 80px auto;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            color: DodgerBlue;
+        }
+        .owner {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        a {
+            color: DodgerBlue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Information</h1>
+        <div class="owner">Managed by: {{ owner_name }}</div>
+        <p><strong>ID:</strong> {{ id }}</p>
+        <p><strong>First Name:</strong> {{ fname }}</p>
+        <p><strong>Last Name:</strong> {{ lname }}</p>
+        <p><strong>Primary Skills:</strong> {{ interest }}</p>
+        <p><strong>Location:</strong> {{ location }}</p>
+        <br>
+        <a href="/">← Back to Add</a>
+    </div>
+</body>
+</html>

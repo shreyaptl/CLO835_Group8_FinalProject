@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Added</title>
+    <style>
+        body {
+            background-image: url('{{ bg_image }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+        .container {
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin: 100px auto;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            color: DodgerBlue;
+        }
+        .owner {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: DodgerBlue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Added Successfully!</h1>
+        <div class="owner">Managed by: {{ owner_name }}</div>
+        <p>Thank you for submitting employee: <strong>{{ name }}</strong></p>
+        <br>
+        <a href="/">← Add Another</a>
+    </div>
+</body>
+</html>
