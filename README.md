@@ -9,6 +9,7 @@ sudo apt-get install mysql-client -y
 pip3 install -r requirements.txt
 python3 app.py
 ```
+``` docker network create clo835project ```
 
 # Building and running 2 tier web application locally
 ### Building mysql docker image 
@@ -23,7 +24,8 @@ docker build -t my_app -f Dockerfile .
 
 ### Running mysql
 ```
-docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=db_pass123 -p 3306:3306 my_db
+docker run -d --name mysql --network clo835project -e MYSQL_ROOT_PASSWORD=db_pass123 -p 3306:3306 my_db
+
 ```
 
 ## Quick Demo Command
@@ -35,7 +37,7 @@ To quickly run the application:
 # Set required variables
 export TEAM_NAME="CloudSprint"
 export TEAM_SLOGAN="Where Ideas Take Flight"
-export IMAGE_URL="s3://final-project-background/background.jpg"
+export IMAGE_URL="s3://clo835group8final/background.jpg"
 export S3_BUCKET_NAME="clo835group8final"
 export S3_REGION="us-east-1" 
 export LOCAL_IMAGE_PATH="/app/static/images/background.jpg"
