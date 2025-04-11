@@ -15,7 +15,8 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 DBPORT = int(os.environ.get("DBPORT") or "3306")
 
 # Developer name and S3 info from ConfigMap or env
-OWNER_NAME = os.environ.get("OWNER_NAME", "Shailendra Kushwaha")
+TEAM_NAME = os.environ.get("TEAM_NAME", "CloudSprint")
+TEAM_SLOGAN = os.environ.get("TEAM_SLOGAN", "Where Ideas Take Flight")
 BUCKET_NAME = os.environ.get("S3_BUCKET_NAME", "clo835group8final")
 OBJECT_KEY = os.environ.get("S3_OBJECT_KEY", "background.jpg")
 LOCAL_IMAGE_NAME = "background.jpg"
@@ -74,7 +75,6 @@ def AddEmp():
         cursor.close()
 
     return render_template('addempoutput.html', name=emp_name, owner_name=OWNER_NAME, bg_image=LOCAL_IMAGE_PATH)
-
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
