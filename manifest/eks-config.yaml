@@ -20,6 +20,13 @@ managedNodeGroups:
     enableSSM: true
     iam:
       instanceRoleARN: arn:aws:iam::${AWS_ACCOUNT_ID}:role/eks-node-role
+      withAddonPolicies:
+        autoScaler: true
+        ebs: true
+        efs: true
+        albIngress: true
+        cloudWatch: true
+        s3: true
 
 iam:
   withOIDC: true

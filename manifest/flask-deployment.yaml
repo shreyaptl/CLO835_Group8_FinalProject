@@ -4,76 +4,80 @@ metadata:
   name: flask-app
   namespace: final
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: flask
+      app: flask-app
   template:
     metadata:
       labels:
-        app: flask
+        app: flask-app
     spec:
-      imagePullSecrets:
-      - name: ecr-secret
+      serviceAccountName: clo835
       containers:
-      - name: flask
-        image: <account_id>.dkr.ecr.us-east-1.amazonaws.com/simple-web-app:latest
+      - name: flask-app
+        image: ${ECR_REPO_URL}:latest
         ports:
         - containerPort: 81
         env:
-        - name: IMAGE_URL
+        - name: DBHOST
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: IMAGE_URL
+              key: dbhost
+        - name: DBUSER
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: username
+        - name: DBPWD
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: password
+        - name: DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: database
+        - name: DBPORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: dbport
+        - name: OWNER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: owner_name
         - name: S3_BUCKET_NAME
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: S3_BUCKET_NAME
-        - name: S3_REGION
+              key: s3_bucket_name
+        - name: S3_OBJECT_KEY
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: S3_REGION
-        - name: LOCAL_IMAGE_PATH
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: LOCAL_IMAGE_PATH
-        - name: TEAM_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: TEAM_NAME
-        - name: TEAM_SLOGAN
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: TEAM_SLOGAN
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: MYSQL_USER
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: MYSQL_PASSWORD
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: AWS_ACCESS_KEY_ID
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: AWS_SECRET_ACCESS_KEY
-        volumeMounts:
-        - name: app-data
-          mountPath: /app/static/images
-      volumes:
-      - name: app-data
-        emptyDir: {}
+              key: s3_object_key
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 81
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 81
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      imagePullSecrets:
+      - name: ecr-secret
