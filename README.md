@@ -103,3 +103,5 @@ docker run -d \
 # Switch to CloudFormation service, examine the resources that are being created
 # Update your kubeconfig
 ```aws eks update-kubeconfig --name clo835 --region us-east-1 ```
+
+```kubectl cluster-info```
