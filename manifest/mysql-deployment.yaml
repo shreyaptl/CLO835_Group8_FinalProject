@@ -13,10 +13,9 @@ spec:
       labels:
         app: mysql
     spec:
-      serviceAccountName: clo835
       containers:
       - name: mysql
-        image: mysql:5.7
+        image: 051034484218.dkr.ecr.us-east-1.amazonaws.com/mysql:v0.1
         ports:
         - containerPort: 3306
         env:
@@ -43,18 +42,22 @@ spec:
         livenessProbe:
           exec:
             command:
-            - mysqladmin
-            - ping
+            - sh
+            - -c
+            - mysqladmin ping --host=127.0.0.1 --user=root --password="$MYSQL_ROOT_PASSWORD"
           initialDelaySeconds: 30
           periodSeconds: 10
         readinessProbe:
           exec:
             command:
-            - mysqladmin
-            - ping
+            - sh
+            - -c
+            - mysqladmin ping --host=127.0.0.1 --user=root --password="$MYSQL_ROOT_PASSWORD"
           initialDelaySeconds: 5
           periodSeconds: 10
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pvc
+      imagePullSecrets:
+      - name: ecr-secret
