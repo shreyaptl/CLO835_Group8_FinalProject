@@ -29,8 +29,8 @@ jobs:
     - name: Build, test, tag, and push SQL and WebApp images to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        SQL_ECR_REPOSITORY: sql_final
-        WEBAPP_ECR_REPOSITORY: app_final
+        SQL_ECR_REPOSITORY: mysql
+        WEBAPP_ECR_REPOSITORY: webapp
         IMAGE_TAG: v0.1
       run: |
         # Build Docker images
