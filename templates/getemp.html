@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Employee Info</title>
+    <style>
+        body {
+            background-image: url('{{ bg_image }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+        .container {
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin: 80px auto;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            color: DodgerBlue;
+        }
+        .owner {
+            font-style: italic;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            color: #1bbfc1;
+        }
+        
+        .owner strong,
+        .owner em {
+            display: inline;
+            font-style: normal;
+            font-weight: 600;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 14pt;
+            margin: 10px 0;
+        }
+        button {
+            width: 200px;
+            height: 40px;
+            font-size: 14pt;
+            background-color: grey;
+            color: white;
+            border: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Find Employee Info</h1>
+        <div class="owner">
+            TEAM_NAME: <strong>CloudSprint</strong><br>
+            TEAM_SLOGAN: <em>Where Ideas Take Flight</em>
+        </div>
+        <form action="/fetchdata" method="POST">
+            <input type="number" name="emp_id" placeholder="Enter Employee ID" required><br>
+            <button type="submit">Fetch Info</button>
+        </form>
+    </div>
+</body>
+</html>
