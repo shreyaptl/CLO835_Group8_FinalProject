@@ -64,3 +64,42 @@ docker run -d \
   -p 81:81 \
   my_app
 ```
+
+
+#  Make sure you are using AWS CLI version 2. Use these instructions to update the AWS CLI version in your Cloud9 environment. 
+```/usr/local/bin/aws –-version``` 
+
+
+# Configure your permanent credentials and disable Cloud9 temporary credentials 
+```/usr/local/bin/aws cloud9 update-environment --environment-id $C9_PID  --managed-credentials-action DISABLE```
+
+```rm -vf ${HOME}/.aws/credentials``
+
+# Use credentials from AWS Academy AWS Details and copy them into ~/.aws/credentials file
+
+# install jq
+```sudo yum -y install jq gettext bash-completion```
+
+# Install eksctl
+```curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp```
+```sudo mv -v /tmp/eksctl /usr/local/bin```
+
+# Enable eksctl bash completion
+```eksctl completion bash >> ~/.bash_completion```
+```. /etc/profile.d/bash_completion.sh```
+```. ~/.bash_completion```
+# Install kubectl
+``curl -LO https://dl.k8s.io/release/v1.29.13/bin/linux/amd64/kubectl``
+``chmod +x ./kubectl``
+``sudo mv ./kubectl /usr/local/bin/``
+
+
+# Create the cluster - these steps will take a few minutes
+# Make sure to edit the eks_config and specify your Account Id in place of the [YOUR AWS ACCOUNT]
+
+``` eksctl create cluster -f eks-config.yaml ```
+``` eksctl delete cluster --name clo835 --region us-east-1 ```
+
+# Switch to CloudFormation service, examine the resources that are being created
+# Update your kubeconfig
+```aws eks update-kubeconfig --name clo835 --region us-east-1 ```
