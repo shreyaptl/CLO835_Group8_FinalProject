@@ -24,7 +24,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: dbhost
+              key: DBHOST
         - name: DBUSER
           valueFrom:
             secretKeyRef:
@@ -44,22 +44,22 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: dbport
+              key: DBPORT
         - name: OWNER_NAME
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: owner_name
+              key: OWNER_NAME
         - name: S3_BUCKET_NAME
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: s3_bucket_name
+              key: S3_BUCKET_NAME
         - name: S3_OBJECT_KEY
           valueFrom:
             configMapKeyRef:
               name: app-config
-              key: s3_object_key
+              key: S3_OBJECT_KEY
         resources:
           requests:
             cpu: "100m"
