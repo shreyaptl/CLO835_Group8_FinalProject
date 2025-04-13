@@ -4,21 +4,17 @@ metadata:
   name: app-config
   namespace: final
 data:
-  IMAGE_URL: "s3://final-project-background/background.jpg"
-  S3_BUCKET_NAME: "clo835finalprojects"
+  IMAGE_URL: "s3://clo835group8final/background1.jpg"
+  S3_BUCKET_NAME: "clo835group8final"
   S3_REGION: "us-east-1"
-  LOCAL_IMAGE_PATH: "/app/static/images/background.jpg"
+  LOCAL_IMAGE_PATH: "/app/static/images/background1.jpg"
   TEAM_NAME: "CloudSprint"
   TEAM_SLOGAN: "Where Ideas Take Flight"
-  MYSQL_HOST: "mysql-service"
-  MYSQL_DATABASE: "appdb"
-  AWS_ACCESS_KEY_ID: #AWS cred
-  AWS_SECRET_ACCESS_KEY: #AWS cred 
-  AWS_SESSION_TOKEN: #AWS cred
-  dbhost: "mysql"
+  DBHOST: "mysql"
   database: "employees"
-  dbport: "3306"
-  S3_OBJECT_KEY: "background.jpg"
-  s3_object_key: "background.jpg"
-  owner_name: "Group 8"
-  s3_bucket_name: "clo835finalprojects"
+  AWS_ACCESS_KEY_ID: "{AWS_SECRET}"
+  AWS_SECRET_ACCESS_KEY: "{AWS_SECRET}" 
+  AWS_SESSION_TOKEN: "{AWS_SECRET}"
+  DBPORT: "3306"
+  OWNER_NAME: "Group 8"
+  S3_OBJECT_KEY: "background1.jpg"
