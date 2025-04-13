@@ -98,10 +98,10 @@ docker run -d \
 # Make sure to edit the eks_config and specify your Account Id in place of the [YOUR AWS ACCOUNT]
 
 ``` eksctl create cluster -f eks-config.yaml ```
-``` eksctl delete cluster --name clo835 --region us-east-1 ```
+``` eksctl delete cluster --name clo835-project --region us-east-1 ```
 
 # Switch to CloudFormation service, examine the resources that are being created
 # Update your kubeconfig
-```aws eks update-kubeconfig --name clo835 --region us-east-1 ```
+```aws eks update-kubeconfig --name clo835-project --region us-east-1 ```
 
 ```kubectl cluster-info```
